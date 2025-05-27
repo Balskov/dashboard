@@ -40,8 +40,8 @@ kanban_data = {
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        navn = request.form["brugernavn"]
-        kode = request.form["kode"]
+        navn = request.form.get("brugernavn", "")
+        kode = request.form.get("kode", "") 
 
         if navn == brugernavn and check_password_hash(kode_hash, kode):
             session["logget_ind"] = True
