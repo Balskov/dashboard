@@ -7,10 +7,14 @@
 
     </head>
     <body>
-        <div class="topbar">
-            <span>Velkommen, admin</span>
-            <a href="{{ url_for('logout') }}" class="logout-btn">Log ud</a>
+        <div class="topnav">
+            <a href="{{ url_for('todo') }}" class="{% if aktiv == 'todo' %}active{% endif %}">📋 To-do</a>
+            <a href="{{ url_for('kanban') }}" class="{% if aktiv == 'kanban' %}active{% endif %}">🧱 Kanban</a>
+            <span style="margin-left:auto;">
+                <a href="{{ url_for('logout') }}" class="logout-btn">Log ud</a>
+            </span>
         </div>
+        
         <div class="container">
             <div class="sidebar" id="sidebar">
                 <h2>🗂 Lister</h2>

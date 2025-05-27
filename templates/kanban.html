@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topnav">
+        <a href="{{ url_for('todo') }}" class="{% if aktiv == 'todo' %}active{% endif %}">📋 To-do</a>
+        <a href="{{ url_for('kanban') }}" class="{% if aktiv == 'kanban' %}active{% endif %}">🧱 Kanban</a>
+        <span style="margin-left:auto;"><a href="{{ url_for('logout') }}">Log ud</a></span>
+    </div>
+
+    <h1 style="text-align: center;">Mit Kanban Board</h1>
+
+    <div class="kanban-board">
+        {% for kolonne, kort in kanban_data.items() %}
+        <div class="kanban-column">
+            <h2>{{ kolonne }}</h2>
+            <ul>
+                {% for item in kort %}
+                <li>{{ item.tekst }}</li>
+                {% endfor %}
+            </ul>
+            <form method="post" class="kanban-form">
+                <input type="hidden" name="kolonne" value="{{ kolonne }}">
+                <input type="text" name="tekst" placeholder="Tilføj opgave...">
+                <button type="submit">➕</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
