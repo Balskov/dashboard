@@ -59,8 +59,8 @@ def index():
     todos = data.get(liste_navn, [])
 
         # Opret listen, hvis den ikke findes endnu
-    if liste not in alle_lister:
-        alle_lister[liste] = []
+    if liste_navn not in alle_lister:
+        alle_lister[liste_navn] = []
 
     if request.method == "POST":
         if "opgave" in request.form:

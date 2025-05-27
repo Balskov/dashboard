@@ -294,3 +294,47 @@ html {
 .logout-btn:hover {
     background-color: #004d40;
 }
+
+.login-body {
+    background: linear-gradient(to right, #e0f7fa, #e0f2f1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+body.dark-mode.login-body {
+    background: #121212;
+}
+
+.login-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .login-container {
+    background: #1e1e1e;
+    color: #e0e0e0;
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #00796b;
+}
+
+body.dark-mode .login-container h1 {
+    color: #90caf9;
+}
+
+.login-error {
+    color: red;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
