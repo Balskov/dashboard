@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>To-do</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topnav">
+        <a href="{{ url_for('todo') }}" class="{% if aktiv == 'todo' %}active{% endif %}">📋 To-do</a>
+        <a href="{{ url_for('kanban') }}" class="{% if aktiv == 'kanban' %}active{% endif %}">🧱 Kanban</a>
+        <span style="margin-left:auto;"><a href="{{ url_for('logout') }}">Log ud</a></span>
+    </div>
+
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <h2>🗂 Lister</h2>
+            <ul>
+                {% for navn in alle_lister %}
+                    <li>
+                        <a href="{{ url_for('todo', liste=navn) }}" {% if navn == liste %}class="active"{% endif %}>
+                            {{ navn }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <form method="get" style="margin-top: 1rem;">
+                <input type="text" name="liste" placeholder="➕ Ny liste">
+                <button type="submit">Opret</button>
+            </form>
+        </div>
+
+        <div class="main">
+            <button id="toggleSidebar" class="sidebar-toggle">☰</button>
+
+            <h1>{{ liste|capitalize }}-liste</h1>
+
+            <form method="post">
+                <input type="text" name="opgave" placeholder="Skriv en opgave">
+                <button type="submit">Tilføj</button>
+            </form>
+
+            <ul>
+                {% for todo in todos %}
+                    <li>
+                        <form method="post" style="display: flex; align-items: center; justify-content: space-between;">
+                            <label style="flex-grow: 1;">
+                                <input type="checkbox" style="margin-right: 10px;">
+                                {{ todo.tekst }}
+                            </label>
+                            <input type="hidden" name="slet_id" value="{{ todo.id }}">
+                            <button type="submit" title="Slet">🗑</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li>Ingen opgaver endnu</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
