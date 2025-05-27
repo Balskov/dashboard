@@ -4,7 +4,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import uuid
 import json
 import os
+from collections import defaultdict
 
+alle_lister = defaultdict(list)
 DATAFIL = "todos.json"
 
 def hent_todos():
@@ -55,6 +57,10 @@ def index():
     liste_navn = request.args.get("liste", "privat")  # Standard er 'privat'
     data = hent_todos()
     todos = data.get(liste_navn, [])
+
+        # Opret listen, hvis den ikke findes endnu
+    if liste not in alle_lister:
+        alle_lister[liste] = []
 
     if request.method == "POST":
         if "opgave" in request.form:
