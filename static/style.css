@@ -1,0 +1,271 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #e0f7fa, #e0f2f1);
+    color: #333;
+    padding: 2rem;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1{
+    color: #00796b;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+form{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type='text'] {
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #b2dfdb;
+    border-radius: 6px;
+    background-color: #ffffff;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #00796b;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.2);
+    accent-color: #00796b;
+    cursor: pointer;
+}
+
+button{
+    padding: 12px 20px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #004d40;
+}
+
+button[type="submit"] {
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #d32f2f;
+    color: white;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    background: white;
+    padding: 12px;
+    border: 1px solid #ddd;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+li:hover {
+    background-color: #f1f1f1;
+    transform: translateX(5px);
+}
+
+li:nth-child(even) {
+    background-color: #e2dfdf;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden; /* skjuler sidebar hvis den ryger ud */
+}
+
+.sidebar {
+    width: 220px;
+    background-color: #eeeeee;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+    transform: translateX(0); /* default: synlig */
+    position: relative; /* nødvendig for transform at virke */
+    z-index: 10;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    display: block;
+    padding: 8px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    color: #333;
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:hover {
+    background-color: #b2dfdb;
+}
+
+.sidebar form input[type="text"] {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.main {
+    flex-grow: 1;
+    padding: 2rem;
+    transition: margin-left 0.3s ease;
+    margin-left: 0; /* sørger for at den ikke er for langt til højre */
+    position: relative;
+}
+
+.sidebar-toggle {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 20;
+    color: inherit;
+}
+
+/* Skjult sidebar */
+body.sidebar-hidden .sidebar {
+    transform: translateX(-250px); /* flyt sidebar ud af skærmen */
+}
+
+body.sidebar-hidden .main {
+    margin-left: 0;
+}
+
+body.dark-mode {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode h1 {
+    color: #90caf9;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode button,
+body.dark-mode li {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+body.dark-mode input[type="text"]:focus {
+    border-color: #90caf9;
+}
+
+body.dark-mode li:hover {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode button[type="submit"]:hover {
+    background-color: #c62828;
+}
+
+body.dark-mode #darkModeToggle {
+    background-color: #333;
+    color: #eee;
+}
+
+/* Global reset */
+* {
+    box-sizing: border-box;
+}
+
+/* Mobilvisning og responsiv sidebar */
+@media (max-width: 768px) {
+    body {
+        max-width: none;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    .container {
+        flex-direction: column;
+        overflow-x: hidden;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 220px;
+        background-color: #eeeeee;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        z-index: 10;
+        transform: translateX(-250px); /* skjult som default */
+        transition: transform 0.3s ease;
+    }
+
+    body.sidebar-visible .sidebar {
+        transform: translateX(0); /* vis sidebar */
+    }
+
+    .main {
+        padding: 1rem;
+        margin-left: 0 !important;
+    }
+
+    #toggleSidebar {
+        display: block;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 20;
+        font-size: 2rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: inherit;
+    }
+}
+
+@media (min-width: 769px) {
+    #toggleSidebar {
+        position: absolute;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
