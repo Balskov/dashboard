@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="da">
 <head>
+    <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>🔐 Login</h1>
+    <div class="container" style="max-width: 400px; margin: 10vh auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+        <h1 style="text-align: center;">🔐 Login</h1>
+
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <p style="color: red;">{{ messages[0] }}</p>
+                <p style="color: red; text-align: center;">{{ messages[0] }}</p>
             {% endif %}
         {% endwith %}
-        <form method="post">
-            <input type="text" name="brugernavn" placeholder="Brugernavn">
-            <input type="password" name="kode" placeholder="Adgangskode">
+
+        <form method="post" style="display: flex; flex-direction: column; gap: 1rem;">
+            <input type="text" name="brugernavn" placeholder="Brugernavn" required>
+            <input type="password" name="kode" placeholder="Adgangskode" required>
             <button type="submit">Log ind</button>
         </form>
     </div>
